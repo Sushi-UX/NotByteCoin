@@ -26,6 +26,10 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                                 //STEP #A12. So inside the method, we can use the row Int to pick the title from our currencyArray.
         return coinManager.currencyArray[row]
     }
+                                //STEP #A13. Great. We’ve got a functioning Picker View. But nothing happens when you make a selection. Let’s change that. Use Xcode’s auto-suggest to add this delegate method:
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        print(row)
+    }
     
     
                                 //STEP #A1. Create the following 3 IBOutlets and name them according to the image below: "bitcoinLabel", "currencyLabel" and "currencyPicker"
