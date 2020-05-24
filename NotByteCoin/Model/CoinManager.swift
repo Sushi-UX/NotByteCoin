@@ -20,5 +20,13 @@ struct CoinManager {
                         //STEP #A17. Go to the ViewController...pickerView(didSelectRow:) for the next step...
     func getCoinPrice(for currency: String) {
         let urlString = "\(baseURL)/\(currency)?apikey=\(apiKey)"
+        print(urlString)
     }
 }
+
+
+//----------BOSS LEVEL CHALLENGE--------------
+
+//STEP #B1.
+
+
