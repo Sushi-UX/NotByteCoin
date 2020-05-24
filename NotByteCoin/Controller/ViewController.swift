@@ -10,8 +10,48 @@ import UIKit
                                 //STEP #A2. add a protocol called UIPickerViewDataSource to the class below.
                                 //STEP #A3. After adding this new protocol an error altert will pop up. Select "fix" on the pop-up bubble.
                                 //STEP #A8. Add the protocol UIPickerViewDelegate to the class declaration
-class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
-        func numberOfComponents(in pickerView: UIPickerView) -> Int {
+class ViewController: UIViewController {
+    
+    @IBOutlet weak var bitcoinLabel: UILabel!
+    @IBOutlet weak var currencyLabel: UILabel!
+    @IBOutlet weak var currencyPicker: UIPickerView!
+                                //STEP #A6. Next, we need to tell Xcode how many rows this picker should have using the pickerView:numberOfRowsInComponent: method.
+    
+    var coinManager = CoinManager()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        coinManager.delegate = self
+                                //STEP #A4. set the ViewController.swift as the datasource for the picker. Find viewDidLoad() and add set the ViewController class as the datasource to the currencyPicker object.
+        currencyPicker.dataSource = self
+                                //STEP #A9. Set the ViewController class as the delegate of the currencyPicker.
+        currencyPicker.delegate = self
+    }
+}
+
+//MARK: - CoinManagerDelegate
+
+extension ViewController: CoinManagerDelegate {
+    
+    func didUpdatePrice(price: String, currency: String) {
+        
+        DispatchQueue.main.async {
+            self.bitcoinLabel.text = price
+            self.currencyLabel.text = currency
+        }
+    }
+    
+    func didFailWithError(error: Error) {
+        print(error)
+    }
+}
+
+//MARK: - UIPickerViewDataSource, UIPickerViewDelegate
+
+extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+                                //STEP #A1. Create the following 3 IBOutlets and name them according to the image below: "bitcoinLabel", "currencyLabel" and "currencyPicker"
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
                                 //STEP #A5. Now let’s actually provide the data and add the implementation for the first method numberOfComponents(in:) to determine how many columns we want in our picker. Type in "return 1"
         return 1
     }
@@ -32,44 +72,21 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
 //        print(row)
                                 //STEP #A15. Let’s change that print statement to print the currency selected instead. See if you can change the code to print the currency value selected instead of the row number.
                                 //STEP #A16.Go to the CoinManager for the next step...
-        print(coinManager.currencyArray[row])
+//        print(coinManager.currencyArray[row])
                                 //STEP #A17. Update the pickerView(didSelectRow:) method to pass the selected currency to the CoinManager via the getCoinPrice() method.
         let selectedCurrency = coinManager.currencyArray[row]
         coinManager.getCoinPrice(for: selectedCurrency)
     }
-    
-    
-                                //STEP #A1. Create the following 3 IBOutlets and name them according to the image below: "bitcoinLabel", "currencyLabel" and "currencyPicker"
-    @IBOutlet weak var bitcoinLabel: UILabel!
-    @IBOutlet weak var currencyLabel: UILabel!
-    @IBOutlet weak var currencyPicker: UIPickerView!
-                                //STEP #A6. Next, we need to tell Xcode how many rows this picker should have using the pickerView:numberOfRowsInComponent: method.
-    
-    let coinManager = CoinManager()
-
-        override func viewDidLoad() {
-            super.viewDidLoad()
-            
-                            //STEP #A4. set the ViewController.swift as the datasource for the picker. Find viewDidLoad() and add set the ViewController class as the datasource to the currencyPicker object.
-            currencyPicker.dataSource = self
-                            //STEP #A9. Set the ViewController class as the delegate of the currencyPicker.
-            currencyPicker.delegate = self
-        }
-    }
-
-    
+}
 
 
 
 
 
 
-    
-    
 
-    
 
-    
+
 
 
 
