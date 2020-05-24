@@ -28,7 +28,14 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
                                 //STEP #A13. Great. We’ve got a functioning Picker View. But nothing happens when you make a selection. Let’s change that. Use Xcode’s auto-suggest to add this delegate method:
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print(row)
+                                //STEP #A14. Let’s print that row number to see which one gets selected when we scroll our UIPickerView.
+//        print(row)
+                                //STEP #A15. Let’s change that print statement to print the currency selected instead. See if you can change the code to print the currency value selected instead of the row number.
+                                //STEP #A16.Go to the CoinManager for the next step...
+        print(coinManager.currencyArray[row])
+                                //STEP #A17. Update the pickerView(didSelectRow:) method to pass the selected currency to the CoinManager via the getCoinPrice() method.
+        let selectedCurrency = coinManager.currencyArray[row]
+        coinManager.getCoinPrice(for: selectedCurrency)
     }
     
     
