@@ -20,6 +20,13 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         return coinManager.currencyArray.count
     }
     
+                                //STEP #A10. Next, add the delegate method pickerView(titleForRow:), start typing pickerView and select the method from the drop down list.
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+                                //STEP #A11. This method expects a String as an output. The String is the title for a given row. When the PickerView is loading up, it will ask its delegate for a row title and call the above method once for every row. So when it is trying to get the title for the first row, it will pass in a row value of 0 and a component (column) value of 0.
+                                //STEP #A12. So inside the method, we can use the row Int to pick the title from our currencyArray.
+        return coinManager.currencyArray[row]
+    }
+    
     
                                 //STEP #A1. Create the following 3 IBOutlets and name them according to the image below: "bitcoinLabel", "currencyLabel" and "currencyPicker"
     @IBOutlet weak var bitcoinLabel: UILabel!
@@ -40,12 +47,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
 
     
-                                //STEP #A10. Next, add the delegate method pickerView(titleForRow:), start typing pickerView and select the method from the drop down list.
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-                                //STEP #A11. This method expects a String as an output. The String is the title for a given row. When the PickerView is loading up, it will ask its delegate for a row title and call the above method once for every row. So when it is trying to get the title for the first row, it will pass in a row value of 0 and a component (column) value of 0.
-                                //STEP #A12. So inside the method, we can use the row Int to pick the title from our currencyArray.
-        return coinManager.currencyArray[row]
-    }
+
 
 
 
